@@ -188,7 +188,12 @@ bool Video::init (SetupOptions cfg) {
 		return false;
 	}
 
+#ifdef __PS2__
+	SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+#else
 	renderer = SDL_CreateRenderer(window, -1, 0);
+#endif
 	if (!renderer) {
 		LOG_FATAL("Could not create renderer: %s", SDL_GetError());
 		return false;

@@ -52,7 +52,7 @@
 
 #define WINDOWED_FLAGS (SDL_RESIZABLE | SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_HWPALETTE)
 
-#if defined(CAANOO) || defined(WIZ) || defined(GP2X) || defined(GAMESHELL)
+#if defined(CAANOO) || defined(WIZ) || defined(GP2X) || defined(GAMESHELL) || defined(__PS2__)
 	#define DEFAULT_SCREEN_WIDTH 320
 	#define DEFAULT_SCREEN_HEIGHT 240
 
@@ -71,6 +71,14 @@
 #elif defined(PSP)
 	#define DEFAULT_SCREEN_WIDTH 480
 	#define DEFAULT_SCREEN_HEIGHT 272
+
+	#define FULLSCREEN_ONLY
+	#define NO_RESIZE
+
+	#define FULLSCREEN_FLAGS (SDL_FULLSCREEN | SDL_SWSURFACE | SDL_HWPALETTE)
+#elif defined(__PS2__)
+	#define DEFAULT_SCREEN_WIDTH 320
+	#define DEFAULT_SCREEN_HEIGHT 200
 
 	#define FULLSCREEN_ONLY
 	#define NO_RESIZE

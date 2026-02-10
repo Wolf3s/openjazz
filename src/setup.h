@@ -61,7 +61,7 @@ class Setup {
 
 // Variable
 
-EXTERN Setup setup;
+EXTERN Setup config_setup;
 
 #endif
 

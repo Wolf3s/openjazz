@@ -57,7 +57,7 @@ ServerGame::ServerGame (GameModeType modeType, char* firstLevel, int gameDifficu
 
 	nPlayers = 1;
 	localPlayer = players = new Player[MAX_PLAYERS];
-	localPlayer->init(this, setup.characterName, setup.characterCols, 0);
+	localPlayer->init(this, config_setup.characterName, config_setup.characterCols, 0);
 
 	for (count = 0; count < MAX_CLIENTS; count++)
 		clientPlayer[count] = clientStatus[count] = -1;

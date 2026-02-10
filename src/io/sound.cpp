@@ -304,6 +304,7 @@ void playMusic (const char * fileName, bool restart) {
 
 	ModPlug_SetSettings(&settings);
 
+#ifndef __PS2__
 	// Load the file into libmodplug
 	musicFile = ModPlug_Load(psmData, size);
 	delete[] psmData;
@@ -313,6 +314,7 @@ void playMusic (const char * fileName, bool restart) {
 		delete[] currentMusic;
 		currentMusic = nullptr;
 	}
+#endif
 
 	// Re-apply volume setting
 	setMusicVolume(musicVolume);

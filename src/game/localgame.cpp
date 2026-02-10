@@ -49,7 +49,7 @@ LocalGame::LocalGame (const char *firstLevel, int gameDifficulty) {
 	// Create the player
 	nPlayers = 1;
 	localPlayer = players = new Player[1];
-	localPlayer->init(this, setup.characterName, NULL, 0);
+	localPlayer->init(this, config_setup.characterName, NULL, 0);
 
 }
 

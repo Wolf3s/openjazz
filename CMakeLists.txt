@@ -142,7 +142,7 @@ elseif(LEGACY_SDL)
 	set(SDL_STATUS "SDL1.2 (legacy)")
 else()
 	find_package(SDL2 REQUIRED)
-	if(WIN32 OR WII) # TODO: figure out, which other platforms need this
+	if(WIN32 OR WII OR PS2) # TODO: figure out, which other platforms need this
 		target_link_libraries(OpenJazz SDL2::SDL2main)
 	endif()
 	target_link_libraries(OpenJazz SDL2::SDL2)
@@ -308,6 +308,12 @@ elseif(SWITCH)
 		NACP OpenJazz.nacp
 		ICON ${CMAKE_CURRENT_SOURCE_DIR}/res/switch/OpenJazz.jpg
 		${ROMFS_ARG} ${ROMFS_PATH})
+elseif(PS2)
+	set(CMAKE_EXECUTABLE_SUFFIX .elf)
+	target_sources(OpenJazz PRIVATE
+		src/platforms/ps2.cpp
+		src/platforms/ps2.h)
+	target_link_libraries(OpenJazz -ldebug)
 elseif(WII)
 	target_sources(OpenJazz PRIVATE
 		src/platforms/wii.cpp

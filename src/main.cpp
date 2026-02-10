@@ -217,7 +217,7 @@ void startUp (const char *argv0, int pathCount, char *paths[]) {
 
 
 	// Load settings from config file
-	config = setup.load();
+	config = config_setup.load();
 	if (!config.valid) {
 
 		// Invalid config - apply defaults
@@ -246,7 +246,7 @@ void startUp (const char *argv0, int pathCount, char *paths[]) {
 
 	}
 
-
+	
 	if (SDL_NumJoysticks() > 0) SDL_JoystickOpen(0);
 
 
@@ -368,7 +368,7 @@ void shutDown () {
 	video.deinit();
 
 	// Save settings to config file
-	setup.save();
+	config_setup.save();
 
 }
 

@@ -147,15 +147,15 @@ SetupOptions Setup::load () {
 
 	// Read the player's name
 	for (int i = 0; i < STRING_LENGTH; i++)
-		setup.characterName[i] = file->loadChar();
+		config_setup.characterName[i] = file->loadChar();
 
-	setup.characterName[STRING_LENGTH] = 0;
+	config_setup.characterName[STRING_LENGTH] = 0;
 
 	// Read the player's colours
-	setup.characterCols[0] = file->loadChar();
-	setup.characterCols[1] = file->loadChar();
-	setup.characterCols[2] = file->loadChar();
-	setup.characterCols[3] = file->loadChar();
+	config_setup.characterCols[0] = file->loadChar();
+	config_setup.characterCols[1] = file->loadChar();
+	config_setup.characterCols[2] = file->loadChar();
+	config_setup.characterCols[3] = file->loadChar();
 
 	// Read the music and sound effect volume
 	setMusicVolume(file->loadChar());
@@ -163,10 +163,10 @@ SetupOptions Setup::load () {
 
 	// Read gameplay options
 	int opt = file->loadChar();
-	setup.manyBirds = ((opt & 1) != 0);
-	setup.leaveUnneeded = ((opt & 2) != 0);
-	setup.slowMotion = ((opt & 4) != 0);
-	setup.scale2x = ((opt & 8) == 0);
+	config_setup.manyBirds = ((opt & 1) != 0);
+	config_setup.leaveUnneeded = ((opt & 2) != 0);
+	config_setup.slowMotion = ((opt & 4) != 0);
+	config_setup.scale2x = ((opt & 8) == 0);
 
 	delete file;
 
@@ -246,13 +246,13 @@ void Setup::save () {
 
 	// Write the player's name
 	for (count = 0; count < STRING_LENGTH; count++)
-		file->storeChar(setup.characterName[count]);
+		file->storeChar(config_setup.characterName[count]);
 
 	// Write the player's colour
-	file->storeChar(setup.characterCols[0]);
-	file->storeChar(setup.characterCols[1]);
-	file->storeChar(setup.characterCols[2]);
-	file->storeChar(setup.characterCols[3]);
+	file->storeChar(config_setup.characterCols[0]);
+	file->storeChar(config_setup.characterCols[1]);
+	file->storeChar(config_setup.characterCols[2]);
+	file->storeChar(config_setup.characterCols[3]);
 
 	// Write the music and sound effect volume
 	file->storeChar(getMusicVolume());
@@ -262,10 +262,10 @@ void Setup::save () {
 
 	count = 0;
 
-	if (setup.manyBirds) count |= 1;
-	if (setup.leaveUnneeded) count |= 2;
-	if (setup.slowMotion) count |= 4;
-	if (!setup.scale2x) count |= 8;
+	if (config_setup.manyBirds) count |= 1;
+	if (config_setup.leaveUnneeded) count |= 2;
+	if (config_setup.slowMotion) count |= 4;
+	if (!config_setup.scale2x) count |= 8;
 
 	file->storeChar(count);
 

@@ -640,10 +640,10 @@ int SetupMenu::setupMain () {
 
 	option = 0;
 
-	setupMods[0] = (setup.slowMotion? setupModsOn[0]: setupModsOff[0]);
-	setupMods[1] = (setup.leaveUnneeded? setupModsOn[1]: setupModsOff[1]);
-	setupMods[2] = (setup.manyBirds? setupModsOn[2]: setupModsOff[2]);
-	setupMods[3] = (setup.scale2x? setupModsOn[3]: setupModsOff[3]);
+	setupMods[0] = (config_setup.slowMotion? setupModsOn[0]: setupModsOff[0]);
+	setupMods[1] = (config_setup.leaveUnneeded? setupModsOn[1]: setupModsOff[1]);
+	setupMods[2] = (config_setup.manyBirds? setupModsOn[2]: setupModsOff[2]);
+	setupMods[3] = (config_setup.scale2x? setupModsOn[3]: setupModsOff[3]);
 
 	video.setPalette(menuPalette);
 
@@ -671,7 +671,7 @@ int SetupMenu::setupMain () {
 
 						case 0: // Character name
 
-							if (textInput("character name:", setup.characterName) == E_QUIT) return E_QUIT;
+							if (textInput("character name:", config_setup.characterName) == E_QUIT) return E_QUIT;
 
 							break;
 
@@ -683,7 +683,7 @@ int SetupMenu::setupMain () {
 							if (ret == E_QUIT) return E_QUIT;
 
 							if (ret == E_NONE)
-								setup.characterCols[suboption - 1] = setupCharacterCols[subsuboption];
+								config_setup.characterCols[suboption - 1] = setupCharacterCols[subsuboption];
 
 							break;
 
@@ -696,7 +696,7 @@ int SetupMenu::setupMain () {
 			case 1:
 
 #if !(defined(CAANOO) || defined(WIZ) || defined(GP2X) || defined(PSP) \
-	|| defined(__3DS__) || defined(__SWITCH__) || defined(__vita__))
+	|| defined(__3DS__) || defined(__SWITCH__) || defined(__vita__) || defined(__PS2__))
 				if (setupKeyboard() == E_QUIT) return E_QUIT;
 #else
 				if (message("FEATURE NOT AVAILABLE") == E_QUIT) return E_QUIT;
@@ -706,7 +706,7 @@ int SetupMenu::setupMain () {
 
 			case 2:
 
-#if !defined(DINGOO) && !defined(PSP)  && !defined(__vita__) // FIXME: psp, psvita
+#if !defined(DINGOO) && !defined(PSP)  && !defined(__vita__) && !defined(__PS2__) // FIXME: psp, psvita, ps2
 				if (setupJoystick() == E_QUIT) return E_QUIT;
 #else
 				if (message("FEATURE NOT AVAILABLE") == E_QUIT) return E_QUIT;
@@ -735,9 +735,8 @@ int SetupMenu::setupMain () {
 				break;
 
 			case 5:
-
 				if (setupSound() == E_QUIT) return E_QUIT;
-
+				
 				break;
 
 			case 6:
@@ -756,10 +755,10 @@ int SetupMenu::setupMain () {
 					else
 						setupMods[suboption] = setupModsOff[suboption];
 
-					setup.slowMotion = (setupMods[0] == setupModsOn[0]);
-					setup.leaveUnneeded = (setupMods[1] == setupModsOn[1]);
-					setup.manyBirds = (setupMods[2] == setupModsOn[2]);
-					setup.scale2x = (setupMods[3] == setupModsOn[3]);
+					config_setup.slowMotion = (setupMods[0] == setupModsOn[0]);
+					config_setup.leaveUnneeded = (setupMods[1] == setupModsOn[1]);
+					config_setup.manyBirds = (setupMods[2] == setupModsOn[2]);
+					config_setup.scale2x = (setupMods[3] == setupModsOn[3]);
 
 				}
 

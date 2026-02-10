@@ -18,6 +18,7 @@
 #define _PLATFORMS_H
 
 #include "psp.h"
+#include "ps2.h"
 #include "3ds.h"
 #include "switch.h"
 #include "wii.h"
@@ -32,6 +33,10 @@
 inline void PLATFORM_Init() {
 #ifdef PSP
 	PSP_Init();
+#endif
+
+#ifdef __PS2__
+	PS2_Init();
 #endif
 
 #ifdef __wii__
@@ -64,6 +69,10 @@ inline void PLATFORM_Exit() {
 inline void PLATFORM_AddGamePaths() {
 #ifdef __HAIKU__
 	HAIKU_AddGamePaths();
+#endif
+
+#ifdef __PS2__
+	PS2_AddGamePaths();
 #endif
 
 #ifdef __SYMBIAN32__
@@ -114,6 +123,10 @@ inline void PLATFORM_ErrorNoDatafiles() {
 
 #ifdef PSP
 	PSP_ErrorNoDatafiles();
+#endif
+
+#ifdef __PS2__
+	PS2_ErrorNoDatafiles();
 #endif
 
 #ifdef __3DS__

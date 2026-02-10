@@ -482,7 +482,7 @@ bool JJ1LevelPlayer::takeEvent (JJ1EventType* event, unsigned char gridX, unsign
 		case 2:
 		case 3: // Health
 
-			if ((energy == 4) && setup.leaveUnneeded) return false;
+			if ((energy == 4) && config_setup.leaveUnneeded) return false;
 
 			if (energy < 4) energy++;
 
@@ -590,14 +590,14 @@ bool JJ1LevelPlayer::takeEvent (JJ1EventType* event, unsigned char gridX, unsign
 
 		case 33: // 1-hit shield
 
-			if ((shield >= 1) && setup.leaveUnneeded) return false;
+			if ((shield >= 1) && config_setup.leaveUnneeded) return false;
 			else shield = 1;
 
 			break;
 
 		case 34: // Bird
 
-			if (birds && !setup.manyBirds) return false;
+			if (birds && !config_setup.manyBirds) return false;
 
 			birds = new JJ1Bird(birds, this, gridX, gridY);
 
@@ -605,7 +605,7 @@ bool JJ1LevelPlayer::takeEvent (JJ1EventType* event, unsigned char gridX, unsign
 
 		case 35: // Airboard, etc.
 
-			if (flying && setup.leaveUnneeded) return false;
+			if (flying && config_setup.leaveUnneeded) return false;
 
 			flying = true;
 
@@ -613,7 +613,7 @@ bool JJ1LevelPlayer::takeEvent (JJ1EventType* event, unsigned char gridX, unsign
 
 		case 36: // 4-hit shield
 
-			if ((shield == 5) && setup.leaveUnneeded) return false;
+			if ((shield == 5) && config_setup.leaveUnneeded) return false;
 
 			shield = 5;
 
@@ -621,7 +621,7 @@ bool JJ1LevelPlayer::takeEvent (JJ1EventType* event, unsigned char gridX, unsign
 
 		case 37: // Diamond
 
-			if (gem && setup.leaveUnneeded) return false;
+			if (gem && config_setup.leaveUnneeded) return false;
 
 			gem = true;
 

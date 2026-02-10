@@ -191,7 +191,7 @@ void Level::timeCalcs () {
  */
 int Level::getTimeChange () {
 
-	return paused? 0: ticks - ((steps * (setup.slowMotion? 100: 50)) / 3);
+	return paused? 0: ticks - ((steps * (config_setup.slowMotion? 100: 50)) / 3);
 
 }
 
@@ -362,12 +362,12 @@ int Level::select (bool& menu, int option) {
 
 			if (!multiplayer) {
 
-				bool wasSlow = setup.slowMotion;
+				bool wasSlow = config_setup.slowMotion;
 
 				if (setupMenu.setupMain() == E_QUIT) return E_QUIT;
 
-				if (wasSlow && !setup.slowMotion) steps <<= 1;
-				else if (!wasSlow && setup.slowMotion) steps >>= 1;
+				if (wasSlow && !config_setup.slowMotion) steps <<= 1;
+				else if (!wasSlow && config_setup.slowMotion) steps >>= 1;
 
 				// Restore level palette
 				video.setPalette(palette);
