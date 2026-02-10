@@ -80,7 +80,7 @@ jobs:
           git archive -o openjazz-${OJ_VERSION}.zip --prefix=openjazz-${OJ_VERSION}/ ${GITHUB_SHA}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-dist
           path: openjazz-*.*
@@ -136,7 +136,7 @@ jobs:
           cp build-release/OpenJazz README.md COPYING licenses.txt OJ-${OJ_VERSION}/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-linux-glibc2.35-x86_64
           path: OJ-*/
@@ -174,7 +174,7 @@ jobs:
           mv dist OJ-${OJ_VERSION}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-windows-mingw-x86_64
           path: OJ-*/
@@ -211,7 +211,7 @@ jobs:
           cp build-web/*.{wasm,js,html,data} README.md COPYING licenses.txt OJ-${OJ_VERSION}/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-web
           path: OJ-*/
@@ -225,6 +225,7 @@ jobs:
             image: 'devkitppc:latest'
             text: '(Wii, devkitPPC)'
             wrapper: '$DEVKITPRO/portlibs/wii/bin/powerpc-eabi-cmake'
+            extraflags: '-DNETWORK=OFF'
           - shortname: '3ds'
             image: 'devkitarm:latest'
             text: '(3DS, devkitARM)'
@@ -248,7 +249,8 @@ jobs:
 
       - name: Build OpenJazz
         run: |
-          ${{ matrix.settings.wrapper }} -G Ninja -B build . -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          ${{ matrix.settings.wrapper }} -G Ninja -B build . \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo ${{ matrix.settings.extraflags }}
           cmake --build build
 
       - name: Prepare artifact
@@ -261,7 +263,7 @@ jobs:
           mv OpenJazz OJ-${OJ_VERSION}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-${{ matrix.settings.shortname }}
           path: OJ-*/
@@ -294,7 +296,7 @@ jobs:
           mv OpenJazz OJ-${OJ_VERSION}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: openjazz-psp
           path: OJ-*/
@@ -319,7 +321,7 @@ jobs:
           path: repo
 
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
 
       - name: Zip artifacts and inspect directory
         run: |
@@ -405,7 +407,7 @@ jobs:
           path: repo
 
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
 
       - name: Zip artifacts and inspect directory
         run: |
